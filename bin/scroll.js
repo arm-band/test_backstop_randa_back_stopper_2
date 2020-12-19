@@ -43,7 +43,7 @@ module.exports = async (page, scenario, vp) => {
     const { width, height } = await $ele.boundingBox();
     console.log("W="+width+" H="+height);
 //    await page.waitForNavigation({'waitUntil' : 'networkidle'});
-    await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 5000})
+    await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 10000})
             .catch(e => console.log('timeout exceed. proceed to next operation'));
 
     await scrollToBottom(page, vp.height);
