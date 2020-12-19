@@ -83,6 +83,11 @@ class generateConfig
                 for (const viewport of configYaml.viewports) {
                     config.viewports.push(viewport);
                 }
+                if (configYaml.commons.scroll2bottom) {
+                    // onReady イベント後に下端までスクロールするスクリプトを実行
+                    config.onBeforeScript = `${__dirname}/backstop_data/engine_scripts/puppet/onBefore.js`;
+                    config.onReadyScript = `${__dirname}/${dir.script.scroll}`;
+                }
                 // シナリオのテンプレートをセット
                 const scenarioTemplate = templateJson.scenarios[0];
                 // 設定からシナリオを削除 (初期化)
@@ -92,11 +97,21 @@ class generateConfig
                 if (flag === 'ref') {
                     domain = configYaml.commons.url.ref;
                 }
+                // スクロールのスクリプトを追加する場合、シナリオの hideSelectors に追加する
+                let scenarioHideSelectors = [].concat(scenarioTemplate.hideSelectors);
+                console.log(scenarioHideSelectors)
+                if (configYaml.commons.scroll2bottom) {
+                    for (const hideSelector of configYaml.commons.hideSelectors) {
+                        scenarioHideSelectors.push(hideSelector);
+                    }
+                    console.log(scenarioHideSelectors)
+                }
                 // シナリオを追加する
                 for (const scenario of configYaml.scenarios) {
                     let scenarioParam = Object.assign({}, scenarioTemplate);
                     scenarioParam.label = scenario.label;
                     scenarioParam.url = `${domain}${scenario.url}`;
+                    scenarioParam.hideSelectors = scenarioHideSelectors;
                     config.scenarios.push(scenarioParam);
                 }
             }

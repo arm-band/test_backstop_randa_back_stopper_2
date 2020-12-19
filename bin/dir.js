@@ -7,6 +7,9 @@ module.exports = {
     dist: {
         initjson          : './backstop.json'
     },
+    script: {
+        scroll            : 'bin/scroll.js'
+    },
     backstop_data: {
         backstop_data     : 'backstop_data/',
         bitmaps_reference : 'bitmaps_reference',

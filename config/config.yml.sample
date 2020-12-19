@@ -2,10 +2,13 @@ commons:
   url:
     ref: https://www.example.jp
     test: https://demo.example.jp
+  scroll2bottom: false
+  hideSelectors:
+    - "#__bs_notify__"
 viewports:
   - name: phone
-    width: 320
-    height: 480
+    width: 375
+    height: 667
   - name: tablet
     width: 1024
     height: 768

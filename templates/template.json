@@ -13,7 +13,9 @@
             "readyEvent": "",
             "readySelector": "",
             "delay": 1000,
-            "hideSelectors": [],
+            "hideSelectors": [
+                "#__bs_notify__"
+            ],
             "removeSelectors": [],
             "hoverSelector": "",
             "clickSelector": "",
