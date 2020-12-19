@@ -3,7 +3,7 @@ commons:
     ref: https://www.example.jp
     test: https://demo.example.jp
   scroll2bottom: false
-  hideSelectors:
+  removeSelectors:
     - "#__bs_notify__"
 viewports:
   - name: phone

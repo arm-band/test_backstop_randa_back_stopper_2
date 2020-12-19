@@ -13,10 +13,14 @@
             "readyEvent": "",
             "readySelector": "",
             "delay": 1000,
-            "hideSelectors": [
-                "#__bs_notify__"
+            "hideSelectors": [],
+            "removeSelectors": [
+                "#__bs_notify__",
+                ".eyecatch",
+                ".o-eyecatch",
+                ".c-eyecatch",
+                ".slider"
             ],
-            "removeSelectors": [],
             "hoverSelector": "",
             "clickSelector": "",
             "postInteractionWait": 0,

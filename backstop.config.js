@@ -83,6 +83,8 @@ class generateConfig
                 for (const viewport of configYaml.viewports) {
                     config.viewports.push(viewport);
                 }
+                config.onBeforeScript = `${__dirname}/backstop_data/engine_scripts/puppet/onBefore.js`;
+                config.onReadyScript = `${__dirname}/backstop_data/engine_scripts/puppet/onReady.js`;
                 if (configYaml.commons.scroll2bottom) {
                     // onReady イベント後に下端までスクロールするスクリプトを実行
                     config.onBeforeScript = `${__dirname}/backstop_data/engine_scripts/puppet/onBefore.js`;
@@ -97,21 +99,21 @@ class generateConfig
                 if (flag === 'ref') {
                     domain = configYaml.commons.url.ref;
                 }
-                // スクロールのスクリプトを追加する場合、シナリオの hideSelectors に追加する
-                let scenarioHideSelectors = [].concat(scenarioTemplate.hideSelectors);
-                console.log(scenarioHideSelectors)
+                // スクロールのスクリプトを追加する場合、シナリオの removeSelectors に追加する
+                let scenarioremoveSelectors = [].concat(scenarioTemplate.removeSelectors);
+                console.log(scenarioremoveSelectors)
                 if (configYaml.commons.scroll2bottom) {
-                    for (const hideSelector of configYaml.commons.hideSelectors) {
-                        scenarioHideSelectors.push(hideSelector);
+                    for (const hideSelector of configYaml.commons.removeSelectors) {
+                        scenarioremoveSelectors.push(hideSelector);
                     }
-                    console.log(scenarioHideSelectors)
+                    console.log(scenarioremoveSelectors)
                 }
                 // シナリオを追加する
                 for (const scenario of configYaml.scenarios) {
                     let scenarioParam = Object.assign({}, scenarioTemplate);
                     scenarioParam.label = scenario.label;
                     scenarioParam.url = `${domain}${scenario.url}`;
-                    scenarioParam.hideSelectors = scenarioHideSelectors;
+                    scenarioParam.removeSelectors = scenarioremoveSelectors;
                     config.scenarios.push(scenarioParam);
                 }
             }
