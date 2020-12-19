@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const merge = require('merge-img');
 
-async function scrollToBottom (page, viewport, height) {
+async function scrollToBottom (page, viewport) {
     await page.screenshot({path: 'tmp/fullscreen.png', fullPage: true});
 
     const getScrollHeight = () => {
@@ -12,7 +12,11 @@ async function scrollToBottom (page, viewport, height) {
     let currentPosition = 0;
     let scrollNumber = 0;
 
+    let screens = [];
     while (currentPosition < scrollHeight) {
+        console.log("Screen "+scrollNumber);
+        let screen = await page.screenshot({path: 'tmp/screen-'+scrollNumber+'.png', fullPage: false, clip: {x: 0, y:scrollNumber*viewport.height, width: viewport.width, height: viewport.height}});
+        screens.push(screen);
         scrollNumber += 1;
         const nextPosition = scrollNumber * viewport.height;
         await page.evaluate(function (scrollTo) {
@@ -27,13 +31,6 @@ async function scrollToBottom (page, viewport, height) {
 
         scrollHeight = await page.evaluate(getScrollHeight);
         console.log(`ScrollHeight ${scrollHeight}`);
-    }
-
-    let screens = [];
-    for(let i = 0; (i*viewport.height) < height; i=i+1) {
-        console.log("Screen "+i);
-        let screen = await page.screenshot({path: 'tmp/screen-'+i+'.png', fullPage: false, clip: {x: 0, y:i*viewport.height, width: viewport.width, height: viewport.height}});
-        screens.push(screen);
     }
     img = await merge(screens, {direction: true, offset: 20, margin: 10, color: 0xFF0000FF});
     img.write('tmp/out.png');
@@ -57,7 +54,7 @@ module.exports = async (page, scenario, vp) => {
     await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 10000})
             .catch(e => console.log('timeout exceed. proceed to next operation'));
 
-    await scrollToBottom(page, vp, height);
+    await scrollToBottom(page, vp);
 
     await browser.close();
 };
