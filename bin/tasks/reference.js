@@ -1,11 +1,10 @@
 const backstop            = require('backstopjs');
-//const generateConfigClass = require('../../backstop.config');
-//const generateConfig      = new generateConfigClass();
-//const config              = generateConfig.setConfig('template.json', 'config.yml', 'ref');
+const generateConfigClass = require('../../backstop.config');
+const generateConfig      = new generateConfigClass();
+const config              = generateConfig.setConfig('template.json', 'config.yml', 'ref');
 
 backstop('reference', {
-//    config: config
-    config: './backstop.json'
+    config: config
     }).then(() => {
         console.log('succeeded:  generating reference');
     }).catch(() => {

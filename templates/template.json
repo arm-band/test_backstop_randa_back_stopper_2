@@ -1,30 +1,46 @@
 {
     "id": "backstop_default",
     "viewports": [],
+    "onBeforeScript": "puppet/onBefore.js",
+    "onReadyScript": "puppet/onReady.js",
+    "mergeImgHack": true,
     "scenarios": [
         {
             "label": "top",
+            "cookiePath": "backstop_data/engine_scripts/cookies.json",
             "url": "http://www.example.jp/",
-            "selectors": [],
-            "selectorExpansion": true,
+            "referenceUrl": "",
+            "readyEvent": "",
+            "readySelector": "",
+            "delay": 1000,
             "hideSelectors": [],
             "removeSelectors": [],
-            "readyEvent": null,
-            "delay": 500,
+            "hoverSelector": "",
+            "clickSelector": "",
+            "postInteractionWait": 0,
+            "selectors": [
+                "document"
+            ],
+            "selectorExpansion": true,
+            "expect": 0,
             "misMatchThreshold" : 0.1,
-            "onBeforeScript": "onBefore.js",
-            "onReadyScript": "onReady.js"
+            "requireSameDimensions": true
         }
     ],
     "paths": {
         "bitmaps_reference": "backstop_data/bitmaps_reference",
         "bitmaps_test": "backstop_data/bitmaps_test",
-        "casper_scripts": "backstop_data/casper_scripts",
+        "engine_scripts": "backstop_data/engine_scripts",
         "html_report": "backstop_data/html_report",
         "ci_report": "backstop_data/ci_report"
     },
-    "casperFlags": [],
-    "engine": "puppeteer",
     "report": ["browser"],
-    "debug": false
+    "engine": "puppeteer",
+    "engineOptions": {
+        "args": ["--no-sandbox"]
+    },
+    "asyncCaptureLimit": 5,
+    "asyncCompareLimit": 50,
+    "debug": false,
+    "debugWindow": false
 }

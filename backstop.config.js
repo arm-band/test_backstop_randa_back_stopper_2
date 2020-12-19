@@ -72,7 +72,7 @@ class generateConfig
             // テスト結果の出力先パスを書き換える
             config.paths.bitmaps_reference = `${dir.backstop_data.backstop_data}${dir.backstop_data.bitmaps_reference}`;
             config.paths.bitmaps_test = `${dir.backstop_data.backstop_data}${dir.backstop_data.bitmaps_test}`;
-            config.paths.casper_scripts = `${dir.backstop_data.backstop_data}${dir.backstop_data.casper_scripts}`;
+            config.paths.engine_scripts = `${dir.backstop_data.backstop_data}${dir.backstop_data.engine_scripts}`;
             config.paths.html_report = `${dir.backstop_data.backstop_data}${dir.backstop_data.html_report}`;
             config.paths.ci_report = `${dir.backstop_data.backstop_data}${dir.backstop_data.ci_report}`;
 
