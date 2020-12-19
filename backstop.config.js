@@ -100,20 +100,20 @@ class generateConfig
                     domain = configYaml.commons.url.ref;
                 }
                 // スクロールのスクリプトを追加する場合、シナリオの removeSelectors に追加する
-                let scenarioremoveSelectors = [].concat(scenarioTemplate.removeSelectors);
-                console.log(scenarioremoveSelectors)
+                let scenarioRemoveSelectors = [].concat(scenarioTemplate.removeSelectors);
+                console.log(scenarioRemoveSelectors)
                 if (configYaml.commons.scroll2bottom) {
                     for (const hideSelector of configYaml.commons.removeSelectors) {
-                        scenarioremoveSelectors.push(hideSelector);
+                        scenarioRemoveSelectors.push(hideSelector);
                     }
-                    console.log(scenarioremoveSelectors)
+                    console.log(scenarioRemoveSelectors)
                 }
                 // シナリオを追加する
                 for (const scenario of configYaml.scenarios) {
                     let scenarioParam = Object.assign({}, scenarioTemplate);
                     scenarioParam.label = scenario.label;
                     scenarioParam.url = `${domain}${scenario.url}`;
-                    scenarioParam.removeSelectors = scenarioremoveSelectors;
+                    scenarioParam.removeSelectors = scenarioRemoveSelectors;
                     config.scenarios.push(scenarioParam);
                 }
             }
