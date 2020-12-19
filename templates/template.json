@@ -3,7 +3,6 @@
     "viewports": [],
     "onBeforeScript": "puppet/onBefore.js",
     "onReadyScript": "puppet/onReady.js",
-    "mergeImgHack": true,
     "scenarios": [
         {
             "label": "top",

@@ -11,8 +11,12 @@
     "author": "Arm Band",
     "license": "ISC",
     "devDependencies": {
-        "backstopjs": "beta",
-        "merge-img": "2.1.3",
+        "backstopjs": "^5.0.7",
+        "merge-img": "^2.1.3",
+        "puppeteer": "^5.5.0",
         "yaml": "^1.10.0"
+    },
+    "resolutions": {
+        "puppeteer": "^5.5.0"
     }
 }
