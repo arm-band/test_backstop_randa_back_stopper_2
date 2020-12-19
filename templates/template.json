@@ -1,0 +1,30 @@
+{
+    "id": "backstop_default",
+    "viewports": [],
+    "scenarios": [
+        {
+            "label": "top",
+            "url": "http://www.example.jp/",
+            "selectors": [],
+            "selectorExpansion": true,
+            "hideSelectors": [],
+            "removeSelectors": [],
+            "readyEvent": null,
+            "delay": 500,
+            "misMatchThreshold" : 0.1,
+            "onBeforeScript": "onBefore.js",
+            "onReadyScript": "onReady.js"
+        }
+    ],
+    "paths": {
+        "bitmaps_reference": "backstop_data/bitmaps_reference",
+        "bitmaps_test": "backstop_data/bitmaps_test",
+        "casper_scripts": "backstop_data/casper_scripts",
+        "html_report": "backstop_data/html_report",
+        "ci_report": "backstop_data/ci_report"
+    },
+    "casperFlags": [],
+    "engine": "puppeteer",
+    "report": ["browser"],
+    "debug": false
+}

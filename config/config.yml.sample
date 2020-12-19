@@ -1,0 +1,19 @@
+commons:
+  url:
+    ref: https://www.example.jp
+    test: https://demo.example.jp
+viewports:
+  - name: phone
+    width: 320
+    height: 480
+  - name: tablet
+    width: 1024
+    height: 768
+  - name: pc
+    width: 1920
+    height: 1080
+scenarios:
+  - label: top
+    url: /
+  - label: about
+    url: /about.html
