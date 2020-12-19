@@ -1,7 +1,9 @@
 const puppeteer = require('puppeteer');
 const merge = require('merge-img');
 
-async function scrollToBottom (page, viewport, screens) {
+async function scrollToBottom (page, viewport, height) {
+    await page.screenshot({path: 'tmp/fullscreen.png', fullPage: true});
+
     const getScrollHeight = () => {
         return Promise.resolve(document.documentElement.scrollHeight);
     }
@@ -25,13 +27,16 @@ async function scrollToBottom (page, viewport, screens) {
 
         scrollHeight = await page.evaluate(getScrollHeight);
         console.log(`ScrollHeight ${scrollHeight}`);
-
-        console.log("Screen "+scrollNumber);
-        let screen = await page.screenshot({path: 'tmp/screen-'+scrollNumber+'.png', fullPage: false, clip: {x: 0, y:scrollNumber*viewport.height, width: viewport.width, height: viewport.height}});
-        screens.push(screen);
     }
 
-    return screens;
+    let screens = [];
+    for(let i = 0; (i*viewport.height) < height; i=i+1) {
+        console.log("Screen "+i);
+        let screen = await page.screenshot({path: 'tmp/screen-'+i+'.png', fullPage: false, clip: {x: 0, y:i*viewport.height, width: viewport.width, height: viewport.height}});
+        screens.push(screen);
+    }
+    img = await merge(screens, {direction: true, offset: 20, margin: 10, color: 0xFF0000FF});
+    img.write('tmp/out.png');
 };
 
 module.exports = async (page, scenario, vp) => {
@@ -52,13 +57,7 @@ module.exports = async (page, scenario, vp) => {
     await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 10000})
             .catch(e => console.log('timeout exceed. proceed to next operation'));
 
-    await page.screenshot({path: 'tmp/fullscreen.png', fullPage: true});
-
-    let screens = [];
-    screens = await scrollToBottom(page, vp, screens);
-
-    img = await merge(screens, {direction: true, offset: 20, margin: 10, color: 0xFF0000FF});
-    img.write('tmp/out.png');
+    await scrollToBottom(page, vp, height);
 
     await browser.close();
 };
