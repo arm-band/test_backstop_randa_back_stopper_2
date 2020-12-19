@@ -115,6 +115,7 @@ class generateConfig
                     config.scenarios.push(scenarioParam);
                 }
             }
+            config.randaflag = flag;
         }
         return config;
     };
